@@ -1,0 +1,57 @@
+.createCustomerHeader {
+  font-size: 1.5rem;
+}
+
+.createCustomerForm {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.addressSection {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.addressSection input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+.addressSection input:focus {
+  border-color: var(--fore);
+  outline: none;
+}
+.createCustomerForm input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+.createCustomerForm input:focus {
+  border-color: var(--fore);
+  outline: none;
+}
+.createCustomerForm label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.createCustomerForm select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  color: var(--text);
+}
+.createCustomerForm select:focus {
+  border-color: var(--fore);
+  outline: none;
+}
+.createCustomerForm select option {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: var(--primary);
+  color: var(--text);
+}

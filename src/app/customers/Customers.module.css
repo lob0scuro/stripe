@@ -1,0 +1,9 @@
+.customerTable table {
+  border-collapse: collapse;
+  text-indent: initial;
+  border-spacing: 2px;
+}
+
+.customerTable table:is(td, th) {
+  border-style: solid;
+}

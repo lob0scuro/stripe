@@ -1,0 +1,72 @@
+---------------------------------------------
+---------------------------------------------
+
+FLOW:
+
+1. Log in to the dashboard.
+
+2. Create a new Stripe Customer (name, email, maybe phone/address).
+
+3. Attach a payment method (card info).
+
+4. Select a subscription plan (your Stripe Product/Price).
+
+5. Create the subscription.
+
+---------------------------------------------
+---------------------------------------------
+
+AUTH:
+
+If it’s only for internal use, consider NextAuth with simple email/password or OAuth for staff.
+
+Or even simpler: a single shared login for all sales staff (not recommended, but works if speed matters).
+
+---------------------------------------------
+---------------------------------------------
+
+FLOW EXAMPLE:
+
+>> Salesperson logs in
+
+>> Form 1 – Collect customer info → POST to /api/stripe/createCustomer
+
+>> Form 2 – Collect card info via Stripe Elements → confirm and get Payment Method ID
+
+>> Form 3 – Select plan → POST to /api/stripe/createSubscription with Customer ID and Payment Method ID
+
+---------------------------------------------
+---------------------------------------------
+
+PAYMENT FLOW OPTIONS:
+You have 2 secure paths to collect card details:
+
+Stripe Checkout (easy, but redirect-based):
+
+Simple UI, handles all PCI compliance.
+
+Just redirect to a Stripe-hosted page.
+
+Best for MVP.
+
+Stripe Elements (custom, more work but seamless):
+
+Embed a card form in your dashboard.
+
+Use stripe.confirmCardSetup() or stripe.confirmPayment.
+
+If your salespeople will be physically typing in card info from the customer, Elements gives a better, smoother experience without redirects.
+
+---------------------------------------------
+---------------------------------------------
+
+WEBHOOKS:
+You’ll eventually want Stripe to notify your server about events
+
+- Payment success
+
+- Subscription status change
+
+- Card declines
+
+Set up an API route like /api/stripe/webhook and register it in Stripe Dashboard.
