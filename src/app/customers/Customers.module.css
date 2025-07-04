@@ -1,9 +1,37 @@
-.customerTable table {
+table.customersTable {
   border-collapse: collapse;
-  text-indent: initial;
-  border-spacing: 2px;
+  font-family: system-ui;
+  margin-block: 2rem;
+  width: 60svw;
 }
 
-.customerTable table:is(td, th) {
-  border-style: solid;
+tr:nth-of-type(even) {
+  background-color: var(--secondary);
+}
+
+.customersTable caption {
+  font-size: 2rem;
+}
+
+.customersTable thead {
+  border: 1px solid white;
+  color: var(--green);
+}
+.customersTable thead tr th {
+  text-align: start;
+  padding-left: 8px;
+  font-size: 24px;
+}
+
+.customersTable tbody {
+  border: 1px solid white;
+}
+.customersTable tbody tr td {
+  padding: 10px 0 10px 8px;
+  cursor: pointer;
+}
+
+.customersTable tbody tr:hover {
+  background-color: var(--green);
+  color: var(--primary);
 }

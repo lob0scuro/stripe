@@ -21,35 +21,33 @@ const Customers = () => {
   }, []);
   return (
     <>
-      <div className="btnBlock">
-        <Button
-          title="Add Customer"
-          onClick={() => handleNavigation("/customers/add-customer")}
-        />
-      </div>
-      <div className={styles.customersTable}>
-        <table>
-          <caption>Customers</caption>
-          <colgroup>
-            <col />
-            <col />
-          </colgroup>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Email</th>
+      <table className={styles.customersTable}>
+        <caption>Customers</caption>
+        <colgroup>
+          <col />
+          <col />
+        </colgroup>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          {customers?.map(({ id, name, email }) => (
+            <tr key={id} onClick={() => handleNavigation(`/customers/${id}`)}>
+              <td>{name}</td>
+              <td>{email}</td>
             </tr>
-          </thead>
-          <tbody>
-            {customers?.map(({ id, name, email }) => (
-              <tr key={id} onClick={() => handleNavigation(`/customers/${id}`)}>
-                <td>{name}</td>
-                <td>{email}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+          ))}
+        </tbody>
+      </table>
+      {/* <div className="btnBlock"> */}
+      <Button
+        title="Add Customer"
+        onClick={() => handleNavigation("/customers/add-customer")}
+      />
+      {/* </div> */}
     </>
   );
 };

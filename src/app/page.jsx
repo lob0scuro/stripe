@@ -18,7 +18,10 @@ const Home = () => {
           title="Customers"
           onClick={() => handleNavigation("/customers")}
         />
-        <Button title="Products" />
+        <Button
+          title="Products"
+          onClick={() => handleNavigation("/products")}
+        />
         <Button title="Subscriptions" />
       </div>
     </>
