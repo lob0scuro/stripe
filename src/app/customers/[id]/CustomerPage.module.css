@@ -1,3 +1,10 @@
 .customerInfoBlock h1 {
   font-size: 2rem;
 }
+
+.delButton {
+  background-color: red;
+  border-radius: 8px;
+  padding: 0.8rem 1.2rem;
+  font-weight: 600;
+}

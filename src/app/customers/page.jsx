@@ -42,12 +42,10 @@ const Customers = () => {
           ))}
         </tbody>
       </table>
-      {/* <div className="btnBlock"> */}
       <Button
         title="Add Customer"
         onClick={() => handleNavigation("/customers/add-customer")}
       />
-      {/* </div> */}
     </>
   );
 };

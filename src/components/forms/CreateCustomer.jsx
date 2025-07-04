@@ -112,13 +112,14 @@ const CreateCustomer = () => {
           />
         </div>
         <div>
-          <label htmlFor="phone">Phone Number</label>
+          <label htmlFor="phone">*Phone Number</label>
           <input
             type="tel"
             name="phone"
             id="phone"
             value={formData.phone}
             onChange={handleChange}
+            required
           />
         </div>
         <div className={styles.addressSection}>
