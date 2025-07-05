@@ -20,6 +20,7 @@ export async function GET() {
 export async function POST(request) {
   try {
     const body = await request.json();
+
     const customer = await stripe.customers.create({
       email: body.email,
       name: `${capitalize(body.first_name)} ${capitalize(body.last_name)}`,
@@ -30,6 +31,45 @@ export async function POST(request) {
         state: body.state,
         postal_code: body.zip,
         country: body.country,
+      },
+    });
+
+    let paymentMethodId = null;
+
+    if (body.testMode) {
+      const cardNumbers = {
+        default: "4242424242424242",
+        fail: "4000000000009995",
+        insufficient_funds: "4000000000009995",
+      };
+
+      const cardNumber = cardNumbers[body.card_choice] || cardNumbers.default;
+
+      const paymentMethod = await stripe.paymentMethods.create({
+        type: "card",
+        card: {
+          number: cardNumber,
+          exp_month: 12,
+          exp_year: 2027,
+          cvc: "123",
+        },
+      });
+
+      paymentMethodId = paymentMethod.id;
+    } else {
+      paymentMethodId = body.payment_method_id;
+      if (!paymentMethodId) {
+        throw new Error("No payment method provided for live mode.");
+      }
+    }
+
+    await stripe.paymentMethods.attach(paymentMethodId, {
+      customer: customer.id,
+    });
+
+    await stripe.customers.update(customer.id, {
+      invoice_settings: {
+        default_payment_method: paymentMethodId,
       },
     });
 
