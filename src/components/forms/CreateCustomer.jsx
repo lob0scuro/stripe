@@ -21,7 +21,6 @@ const CreateCustomer = () => {
   });
 
   const [loading, setLoading] = useState(false);
-  const [customer, setCustomer] = useState(null);
   const [error, setError] = useState(null);
   const router = useRouter();
 
@@ -38,7 +37,7 @@ const CreateCustomer = () => {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch("/api/createCustomer", {
+      const response = await fetch("/api/customers", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -51,7 +50,6 @@ const CreateCustomer = () => {
       }
 
       const data = await response.json();
-      setCustomer(data.customer);
       setFormData({
         email: "",
         first_name: "",

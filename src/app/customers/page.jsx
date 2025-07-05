@@ -13,7 +13,9 @@ const Customers = () => {
   const [customers, setCustomers] = useState([]);
   useEffect(() => {
     const get = async () => {
-      const res = await fetch("/api/listCustomers");
+      const res = await fetch("/api/customers", {
+        method: "GET",
+      });
       const data = await res.json();
       setCustomers(data.customers.data);
     };

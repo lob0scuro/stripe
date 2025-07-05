@@ -1,7 +1,6 @@
 "use client";
 
 import Button from "@/components/Button";
-import CreateCustomer from "@/components/forms/CreateCustomer";
 import React from "react";
 import { useRouter } from "next/navigation";
 
