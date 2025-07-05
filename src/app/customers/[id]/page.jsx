@@ -13,17 +13,34 @@ const CustomerPage = () => {
   const { id } = useParams();
   const router = useRouter();
   const [customer, setCustomer] = useState(null);
+  const [subscriptions, setSubscriptions] = useState([]);
 
   useEffect(() => {
     if (!id) return;
-    const get = async () => {
-      const res = await fetch(`/api/customers/${id}`, {
-        method: "GET",
-      });
-      const data = await res.json();
-      setCustomer(data.customer);
+    const fetchCustomerData = async () => {
+      try {
+        const [customerRes, subsRes] = await Promise.all([
+          fetch(`/api/customers/${id}`),
+          fetch(`/api/customers/${id}/subscriptions`),
+        ]);
+
+        const customerData = await customerRes.json();
+        const subsData = await subsRes.json();
+
+        if (!customerRes.ok) {
+          throw new Error(customerRes.error);
+        }
+        if (!subsRes.ok) {
+          throw new Error(subsRes.error);
+        }
+        console.log(subsData);
+        setCustomer(customerData.customer);
+        setSubscriptions(subsData.subscriptions);
+      } catch (error) {
+        toast.error(error.message);
+      }
     };
-    get();
+    fetchCustomerData();
   }, [id]);
 
   const handleDelete = async () => {
@@ -48,7 +65,9 @@ const CustomerPage = () => {
   return (
     <>
       <div className={styles.customerInfoBlock}>
-        <h1>{customer.name}</h1>
+        <h1 className={customer.delinquent ? styles.delinquent : ""}>
+          {customer.name} {customer.delinquent && <small>(Delinquent)</small>}
+        </h1>
         <div className={styles.contactInfo}>
           <p>
             <small>email:</small>
@@ -73,7 +92,13 @@ const CustomerPage = () => {
         )}
       </div>
       <div className="btnBlock">
-        <Button title="Start Subscription" />
+        {subscriptions.length === 0 && (
+          <Button
+            title="Start Subscription"
+            onClick={() => router.push(`/customers/${id}/start-subscription`)}
+          />
+        )}
+
         <Button
           title="Delete Customer"
           className={styles.delButton}

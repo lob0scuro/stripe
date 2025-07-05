@@ -18,6 +18,10 @@
   /* justify-self: center; */
 }
 
+.delinquent {
+  color: red;
+}
+
 .contactInfo {
   text-align: start;
   grid-area: b;

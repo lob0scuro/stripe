@@ -36,8 +36,12 @@ const Customers = () => {
           </tr>
         </thead>
         <tbody>
-          {customers?.map(({ id, name, email }) => (
-            <tr key={id} onClick={() => handleNavigation(`/customers/${id}`)}>
+          {customers?.map(({ id, name, email, delinquent }) => (
+            <tr
+              className={delinquent ? styles.delinquent : ""}
+              key={id}
+              onClick={() => handleNavigation(`/customers/${id}`)}
+            >
               <td>{name}</td>
               <td>{email}</td>
             </tr>

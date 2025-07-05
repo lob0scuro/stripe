@@ -35,3 +35,7 @@ tr:nth-of-type(even) {
   background-color: var(--green);
   color: var(--primary);
 }
+
+.delinquent {
+  color: red;
+}
